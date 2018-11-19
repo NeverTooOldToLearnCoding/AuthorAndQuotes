@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<title>Success</title>
+
+</head>
+
+<style type="text/css">
+
+.bottom{
+	width: 55%;
+	padding: 5%;
+	display:inline-block;
+}
+
+input{
+	width: 80%;
+	display:inline-block;
+	margin: 5px;
+}
+
+.top p{
+	margin-left:800px;
+}
+
+.top button{
+	margin-left:900px;
+}
+
+.message{
+	color: red;
+}
+
+.bottom button{
+	margin-left: 100px;
+}
+
+</style>
+
+<body>
+
+<div class = "top">
+
+	<h>Edit My Account</h>
+	<p><a href="/thewall"><u>Back</u></a></p>
+	<form action = "/logout">
+	<button type = 'submit'>Logout</button>
+	</form>
+
+</div>
+
+	<div class="bottom">
+
+			{% with messages = get_flashed_messages(category_filter=['description']) %}
+			{% if messages %}
+			{% for message in messages %}
+			<p class = "message">{{message}}</p>
+			{% endfor %}
+			{% endif %}
+			{% endwith %}
+
+			<form action = "/editprocess" method = "post">
+
+				<label for="firstname">First Name</label>
+					<input type = "text" name = "firstname" value="{{viewuser[0]['first_name']}}">
+
+				<label for="lastname">Last Name</label>
+					<input type = "text" name = "lastname" value = "{{viewuser[0]['last_name']}}">
+
+				<label for="email">Email</label>
+					<input type = "text" name = "email" value = "{{viewuser[0]['emails']}}">
+
+				<input type ="hidden" name = "userid" value = "{{ viewuser[0]['idUsers'] }}">
+				<button type = 'submit'>Update</button>
+
+			</form>
+
+		</div>
+
+
+
+</body>
+
+</html>

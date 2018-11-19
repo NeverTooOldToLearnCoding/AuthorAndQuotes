@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-	<title>Simple Wall</title>
+	<title>Quote Dash</title>
 
 </head>
 
@@ -16,46 +16,84 @@
 <style type="text/css">
 
 *{
-	width: 100%;
 }
-
+*/
 .top{
-	width: 100%;
-	height: 30%;
-	outline: 2px solid black;
 
-}
-
-.top p{
-	text-align: right;
-	padding-right: 20px;
-
-
-}
-
-.bottom{
-	width: 90%;
-	height: 70%;
-	text-align: left;
-	margin-left: 70px;
-	margin-top:40px;
-
-}
-
-
-.bottom textarea{
-	height: 100px;
-	width: 90%;
-}
-
-.bottom button{
-	width: 140px;
-	height: 35px;
-	background-color: blue;
+	background-color: black;
 	color:white;
-	font-size: 15px;
-	margin-left:78%;
+	height: 100px;
+	vertical-align: top;
+
 }
+
+.inbox {
+
+	height: 500px;
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+
+.addquote {
+	height: 500px;
+	width: 48%;
+	display:inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin-top: 50px;
+
+
+}
+
+.form input{
+	width: 300px;
+	height: 50px;
+	display: inline-block;
+
+}
+ button{
+	width: 100px;
+	height: 30px;
+	display: inline-block;
+
+}
+
+.inbox p{
+
+	margin: 10px;
+	padding: 10px;
+	text-align: left;
+}
+.quote {
+	outline: 1px solid black;
+	width:60%;
+	margin-top: 10px;
+	margin-left:60px;
+	padding: 10px;
+}
+.message{
+	color:red;
+}
+
+.top a{
+	margin-left: 800px;
+}
+
+.top button{
+	margin-left: 950px;
+
+}
+.inbox a{
+	margin-right: 250px;
+
+}
+
+.inbox button{
+	margin-left:200px;
+}
+
 
 </style>
 
@@ -63,57 +101,89 @@
 
 	<div class = "top">
 
-		<h1>CodingDojo Wall</h1>
+		<p>Welcome {{session['first_name']}} {{session['last_name']}}!</p>
+		<a href="/edit/{{session['userid']}}"><u>Edit My Account</u></a>
+		<form action = "/logout">
+		<button type = 'submit'>Logout</button>
+		</form>
 
-		<p>Welcome {{ name }}! &nbsp; &nbsp; &nbsp; <a href="/logout">log off</a></p>
+	</div>
+
+		{% with messages = get_flashed_messages(category_filter=['flashlike']) %}
+		{% if messages %}
+		{% for message in messages %}
+		<p class = "message">{{message}}</p>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+
+
+		<div class = "inbox">
+		<p>Quotes</p>
+		{% for quote in quotes %}
+
+		<div class = "quote">
+		<p>{{quote['author']}}: "{{ quote['quote'] }}" </p>
+		<p>Posted by
+		<a href = "/view/{{ quote['user_id'] }}">
+		<u>{{quote['first_name']}} {{quote['last_name']}}</u> 	</a></p>
+
+		{% for like in likes %}
+
+		{% if quote['idquote'] == like['quote_id']%}
+
+		<p>{{like['count(*)']}} people like this</p>
+
+		{%endif%}
+
+		{% endfor %}
+
+		<form action = '/like' method = "post">
+
+		<input type = "hidden" name = idquote value = "{{quote['idquote']}}">
+		<button type = "submit" value = 'Submit'>Like!</button>
+
+		</form>
+
+		{% if session['userid'] == quote['user_id'] %}
+
+		<a href="/delete/{{quote['idquote']}}"><u>Delete</u></a>
+
+		{% endif %}
+		</div>
+		{% endfor %}
+</div>
+
+	<div class = "addquote">
+
+		<h>Add a Quote!</h>
+
+		{% with messages = get_flashed_messages(category_filter=['description']) %}
+		{% if messages %}
+		{% for message in messages %}
+		<p class = "message">{{message}}</p>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+
+		<form action="/addquote" method = "post">
+
+		<div class="form">
+
+		<ul>Author <input type="text" name = "author"></ul>
+		
+		<ul>Quote <input type="text" name = "quote"></ul>
+
+		<button type="submit">Submit</button>
+
+		</div>
+
+		</form>
 
 
 	</div>
 
 
-		<div class = "bottom">
-
-			<p>Post a message</p>
-
-			<textarea></textarea>
-
-			<button type = "submit" value="Submit">Post a message</button>
-
-			{% for message in messages %}
-			<br>
-
-			<h>{{ message['first_name'] }} {{message['last_name']}} - {{message['date_created']}}
-			</h>
-
-			<ul>
-				<li>{{ message['message'] }}</li>
-			</ul>
-
-				{% for comment in comments %}
-
-					{% if message['idmessages'] == comment['message_id'] %}
-
-					<p></p>
-
-					<ul>{{ comment['first_name'] }} {{ comment['last_name'] }} {{comment['date_created']}}</ul>
-
-					<ul style = "list-style-type:none" >
-						<li>{{ comment['comment'] }}</li>
-					</ul>
-					{% endif %}
-
-					{% endfor %}
-
-
-			{% endfor %}
-
-
-
-
-
-
-
-		</div>
 
 
 

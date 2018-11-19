@@ -22,7 +22,6 @@
 	width: 460px;
 	vertical-align: top;
 	display: inline-block;
-	outline: 2px solid black;
 	height:500%;
 	padding: 3%;
 	margin-left:2%;
@@ -70,9 +69,6 @@ label{
 
 <body>
 
-<div class = "welcome">
-Welcome!
-</div>
 {% with messages = get_flashed_messages(category_filter=['flashlogout']) %}
 {% if messages %}
 {% for message in messages %}
@@ -83,7 +79,7 @@ Welcome!
 
 <div class="container">
 
-                <h2>Registration</h2>
+                <h2>Register</h2>
 
 					{% with messages = get_flashed_messages(category_filter=['flashfirstname']) %}
 					{% if messages %}
@@ -180,7 +176,7 @@ Welcome!
 
 <div class="container">
 
-              <h2>Login here!</h2>
+              <h2>Login</h2>
 
 				{% with messages = get_flashed_messages(category_filter=['flashlogin']) %}
 				{% if messages %}
@@ -214,7 +210,7 @@ Welcome!
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login!</button>
+                <button type="submit" class="btn btn-primary">Log In</button>
 
             	</form>
 

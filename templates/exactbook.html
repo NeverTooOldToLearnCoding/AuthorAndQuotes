@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<title>Book</title>
+
+</head>
+
+
+
+<style type="text/css">
+
+*{
+	width: 100%;
+}
+
+p {
+	display: inline-block;
+	text-align: right;
+/*	margin-left: -10%;*/
+
+
+}
+
+.top{
+
+	height: 100px;
+	width: 80%;
+	text-align: right;
+}
+
+.inbox {
+
+	height: 500px;
+	width: 40%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+
+}
+
+
+/*.inbox h{
+
+	font-weight: bold;
+	margin-left:150px;
+
+}*/
+textarea{
+	margin-left: 100px;
+	margin-top: 20px;
+	width: 350px;
+	height: 150px;
+}
+
+
+.sendmessages {
+	height: 500px;
+	display:inline-block;
+	width: 50%;
+
+}
+
+.inbox{
+	text-align: left;
+	margin-left: 50px;
+}
+
+.form input{
+	width: 380px;
+	height: 50px;
+	display: inline-block;
+
+}
+ button{
+	width: 120px;
+	height: 30px;
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 70px;
+
+}
+
+img{
+	max-width: 20px;
+	background-image:cover;
+}
+select{
+	width: 40px;
+}
+
+label{
+	width: 50px;
+}
+input{
+	width: 400px;
+	height: 100px;
+	margin-left: 60px;
+}
+
+.author{
+	text-align:left;
+	margin-left: 100px;
+}
+h1{
+	margin-left: 50px;
+	font-size: 20px;
+
+}
+
+</style>
+
+
+<body>
+
+	<div class = "top">
+
+		<a href="/books">Home</a> <a href="/logout">Logout</a>
+
+	</div>
+
+	<div class = "inbox">
+
+	<h1>{{display[0]['title']}}</h1>
+
+	<p class = "author">Author: {{display[0]['author']}}</p>
+
+		<h1>Reviews:</h1>
+
+		{% for display in display %}
+
+		<ul>Ratings: {{display['ratings']}}</ul>
+		<ul><a href ="/review/{{display['idUsers']}}"> {{display['first_name']}} </a> says: {{display['review']}}</ul>
+		<ul>Posted on: {{display['date_created']}}</ul>
+
+		{% endfor %}
+
+	</div>
+
+	<div class = "sendmessages">
+
+		<h1>Add a Review:</h1>
+
+		<form action='/processbook2' method='post'>		
+
+			<textarea name = "addreview"></textarea>
+
+			<label>Rating:</label>
+				<select name = "rating">
+
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+
+				</select>
+
+			<button type='submit' value='Submit'>Submit Review</button>
+
+
+		</form>
+
+
+	</div>
+
+
+
+
+</html>

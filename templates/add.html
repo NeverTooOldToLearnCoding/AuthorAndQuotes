@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<title>Success</title>
+
+</head>
+
+<style type="text/css">
+
+.container2{
+	width: 55%;
+	outline: 2px solid black;
+	padding: 5%;
+	display:inline-block;
+}
+
+input{
+	width: 100%;
+	display:inline-block;
+}
+
+.container2 h{
+	font-weight: bold;
+
+}
+label{
+	font-weight: bold;
+}
+
+
+</style>
+
+<body>
+
+	<div class="container2">
+
+		<form action = "/review" method = "post">
+
+			<h>Add a New Book Title and a Review</h>
+			<br>
+			<br>
+			<label for="email">Book Title</label>
+			<input type = "text" name = "title">
+
+	
+			<label for="author">Author:</label>
+			<br>
+			
+			<label for="author">Choose from the list:</label>
+				<select name = "list">
+				  <option value=""></option>					
+				  <option value="Simpson">Simpson</option>
+				  <option value="Robert">Robert</option>
+				  <option value="Daniel">Daniel</option>
+				  <option value="Mark">Mark</option>
+				</select>	
+				<br>
+
+				<label for="new author">Or add a new author:</label>
+					<input type = "text" name = "author">
+
+				<label for="review">Review</label>
+					<input type = "text" name = "review">
+
+				<label for="rating">Rating</label>
+					<select class = "rating" name = "rating">
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					</select>	<p>stars</p>
+
+				<button type = "submit">Add Book and Review</button>
+
+
+		</form>
+
+
+
+
+</body>
+
+</html>

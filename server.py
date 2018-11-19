@@ -56,7 +56,7 @@ def logincheck():
 	#first name errors
 	if len(request.form['first_name']) < 1:
 		flash("This field is required", "flashfirstname")
-	elif len(request.form['first_name']) < 2:
+	elif len(request.form['first_name']) <= 2:
 		flash("First name needs to be longer than two characters, and contain only text.","flashfirstname")
 	elif request.form['first_name'].isalpha() == False:
 		flash("First name cannot contain numbers", "flashfirstname")
@@ -64,7 +64,7 @@ def logincheck():
 	#last name errors
 	if len(request.form['last_name']) < 1:
 		flash("This field is required", "flashlastname")
-	elif len(request.form['last_name']) < 2:
+	elif len(request.form['last_name']) <= 2:
 		flash("Last name needs to be longer than two characters, and contain only text.", "flashlastname")
 	elif request.form['last_name'].isalpha() == False:
 		flash("Last name cannot contain numbers", "flashlastname")
@@ -84,13 +84,13 @@ def logincheck():
 	#password errors
 	if len(request.form['password']) < 1:
 		flash("This field is required", "flashpassword")
-	elif len(request.form['password']) < 8:
+	elif len(request.form['password']) <= 8:
 		flash("Password name needs to be longer than eight characters", "flashpassword")
 
 	#confirm password errors
 	if len(request.form['confirmpassword']) < 1:
 		flash("This field is required", "flashconfirmpassword")
-	elif len(request.form['confirmpassword']) < 8:
+	elif len(request.form['confirmpassword']) <= 8:
 		flash("Password name needs to be longer than eight characters", "flashconfirmpassword")
 	elif request.form['password'] != request.form['confirmpassword']:
 		flash("The passwords do not match.","flashpassword")
@@ -205,7 +205,7 @@ def editprocess():
 	#first name errors
 	if len(request.form['firstname']) < 1:
 		flash("This field is required", "description")
-	elif len(request.form['firstname']) < 2:
+	elif len(request.form['firstname']) <= 2:
 		flash("First name needs to be longer than two characters, and contain only text.","description")
 	elif request.form['firstname'].isalpha() == False:
 		flash("First name cannot contain numbers", "description")
@@ -213,7 +213,7 @@ def editprocess():
 	#last name errors
 	if len(request.form['lastname']) < 1:
 		flash("This field is required", "description")
-	elif len(request.form['lastname']) < 2:
+	elif len(request.form['lastname']) <= 2:
 		flash("Last name needs to be longer than two characters, and contain only text.", "description")
 	elif request.form['lastname'].isalpha() == False:
 		flash("Last name cannot contain numbers", "description")
@@ -250,11 +250,11 @@ def editprocess():
 
 def addquote():
 
-	if len(request.form['quote']) < 10:
-		flash("Quote needs to be longer than 10 characters.", "description")
-
-	if len(request.form['author']) < 3:
+	print(len(request.form['author']))
+	if len(request.form['author']) <= 3:
 		flash("Author needs to be longer than 3 characters.", "description")
+	if len(request.form['quote']) <= 10:
+		flash("Quote needs to be longer than 10 characters.", "description")
 
 	if '_flashes' in session.keys():
 		return redirect("/thewall")
